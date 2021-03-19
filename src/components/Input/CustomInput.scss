@@ -1,0 +1,46 @@
+@import '../../css/var';
+
+/*Form Component*/
+.input-wrapper {
+  position: relative;
+  margin-bottom: 1rem;
+  width: 100%;
+  .input-box {
+    background-color: $clr-bg;
+    display: block;
+    padding: 1rem 1.5rem;
+    width: 100%;
+    border: 2px solid transparent;
+    color: $clr-body;
+    font-size: 1.4rem;
+    position: relative;
+    border-radius: 3px;
+    outline: none;
+    transition: 0.3s ease-out;
+
+    &:focus,
+    &:valid {
+      border: 2px solid $clr-primary;
+      border-radius: 3px;
+      background-color: #fff;
+    }
+    &:focus ~ label,
+    &:valid ~ label {
+      top: 2px;
+      left: 14px;
+      background: #fff;
+      padding: 0 6px;
+      font-size: 10px;
+    }
+  }
+  label {
+    position: absolute;
+    top: 50%;
+    left: 1.9rem;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: $clr-body;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+  }
+}
