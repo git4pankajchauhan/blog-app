@@ -1,0 +1,33 @@
+@import '../css/var';
+
+.post-section {
+  .body {
+    padding: 2rem 5rem;
+    .filter-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .filter-post {
+        padding: 1rem;
+        border: 1px solid $clr-default;
+        color: $clr-body;
+      }
+      & > button {
+        border: none;
+        background: no-repeat;
+        display: flex;
+        align-items: center;
+        font-size: 1.2rem;
+        gap: 4px;
+        cursor: pointer;
+        color: $clr-body;
+      }
+    }
+  }
+  .post-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 2rem 0;
+  }
+}

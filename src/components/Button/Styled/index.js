@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import themes from 'themes/themes';
 
 export const Button = styled.button`
   border: 1px solid transparent;

@@ -2,15 +2,14 @@ import Axios from 'axios';
 import CustomButton from 'components/Button/CustomButton';
 import { CustomInput } from 'components/Input/CustomInput';
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import themes from 'themes/themes';
-
 const Login = () => {
-  const [message, setMessage] = useState('');
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
-  Axios.defaults.withCredentials = true;
+  const history = useHistory();
 
   const inputChange = e => {
     const { name, value } = e.target;
@@ -26,10 +25,8 @@ const Login = () => {
     e.preventDefault();
     const result = await Axios.post('http://localhost:8000/user/login', user);
     if (result.data.status) {
-      setMessage(result.data.message);
-      setTimeout(() => {
-        setMessage(false);
-      }, 3000);
+      window.location.reload(false);
+      history.push('/');
     }
   };
   return (
@@ -37,7 +34,6 @@ const Login = () => {
       <h2 className="form-title">Log In</h2>
       <CustomInput type="text" name="email" onChange={inputChange} placeholder="Enter Email" />
       <CustomInput type="password" name="password" onChange={inputChange} placeholder="Enter Password" />
-      {message && <div className="message">{message}</div>}
       <CustomButton color={themes.colors.success}>Submit</CustomButton>
     </form>
   );

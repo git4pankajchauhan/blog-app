@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import './SingleItem.scss';
+import '../components/Post/SingleItem.scss';
 import Axios from 'axios';
+import { withRouter } from 'react-router-dom';
 
 const SinglePost = () => {
   const [posts, setPosts] = useState([]);
@@ -29,4 +30,4 @@ const SinglePost = () => {
   );
 };
 
-export default SinglePost;
+export default withRouter(SinglePost);
