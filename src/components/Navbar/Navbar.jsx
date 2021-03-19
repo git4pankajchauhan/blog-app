@@ -3,14 +3,14 @@ import Axios from 'axios';
 import CustomButton from 'components/Button/CustomButton';
 import CustomDrawer from 'components/Drawer/CustomDrawer';
 import { CustomInput, CustomTextArea } from 'components/Input/CustomInput';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import themes from 'themes/themes';
 import './Navbar.scss';
 
 const Navbar = () => {
   const [isLogin, seIsLogin] = useState(false);
-  const [user, seUser] = useState({});
+  const [user, setUser] = useState('');
   const [message, setMessage] = useState('');
   const [addPost, setAddPost] = useState({
     title: '',
@@ -39,6 +39,16 @@ const Navbar = () => {
       }, 3000);
     }
   };
+  const loginUser = async () => {
+    const response = await Axios.get('http://localhost:8000/user/login');
+    if (response.data.loggedIn) {
+      seIsLogin(true);
+      setUser(response.data.user.name);
+    }
+  };
+  useEffect(() => {
+    loginUser();
+  }, []);
   return (
     <div className="head">
       <span className="head-title">Posts </span>
@@ -56,7 +66,7 @@ const Navbar = () => {
           </CustomDrawer>
         )}
         {isLogin ? (
-          <span className="user">Hi, Pankaj</span>
+          <span className="user">Hi, {isLogin && user}</span>
         ) : (
           <>
             <NavLink className="user" exact to="signup">

@@ -10,6 +10,7 @@ const Login = () => {
     email: '',
     password: '',
   });
+  Axios.defaults.withCredentials = true;
 
   const inputChange = e => {
     const { name, value } = e.target;
@@ -24,7 +25,6 @@ const Login = () => {
   const formSubmit = async e => {
     e.preventDefault();
     const result = await Axios.post('http://localhost:8000/user/login', user);
-    console.log(result);
     if (result.data.status) {
       setMessage(result.data.message);
       setTimeout(() => {
