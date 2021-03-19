@@ -1,0 +1,31 @@
+@import '../../css/var';
+
+.head {
+  background: $clr-body;
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 5rem;
+  align-items: center;
+  .head-title {
+    color: #fff;
+  }
+  .l-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 100px;
+    .add-post-btn {
+      border: none;
+      background: no-repeat;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .user {
+      color: #fff;
+    }
+  }
+}

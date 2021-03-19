@@ -32,3 +32,14 @@
     min-width: 340px;
   }
 }
+
+.spost-section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  .post-box {
+    width: 100%;
+  }
+}

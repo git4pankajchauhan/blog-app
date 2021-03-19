@@ -1,59 +1,31 @@
-import { Add } from '@material-ui/icons';
-import CustomButton from 'components/Button/CustomButton';
-import CustomDrawer from 'components/Drawer/CustomDrawer';
-import { CustomInput, CustomTextArea } from 'components/Input/CustomInput';
-import themes from 'themes/themes';
-import React, { useState } from 'react';
+import Axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import './Posts.scss';
 import SingleItem from './SingleItem';
 
 const Posts = () => {
-  const [addPost, setAddPost] = useState({
-    title: '',
-    sub_title: '',
-    tags: '',
-    content: '',
-  });
+  const [posts, setPosts] = useState([]);
+  const [search, setSearch] = useState('');
 
-  const inputChange = e => {
-    const { name, value } = e.target;
-    setAddPost(preVal => {
-      return {
-        ...preVal,
-        [name]: value,
-      };
-    });
+  /* Fetch posts From API */
+  const postsData = async search => {
+    const postdata = await Axios.get(`http://localhost:8000/post/${search}`);
+    setPosts(postdata.data);
   };
-
-  const formSubmit = e => {
-    e.preventDefault();
-    const { title, sub_title, tags, content } = addPost;
-    console.log(`title : ${title}\sub_title : ${sub_title}\tags : ${tags}\content : ${content}`);
-  };
+  useEffect(() => {
+    postsData(search);
+  }, [search]);
 
   return (
     <section className="post-section">
-      <div className="head">
-        <span className="head-title">Posts </span>
-        <div className="l-wrap">
-          <CustomDrawer btnText="Create New Post" icon={<Add />} label="Edit Profile">
-            <form action="" method="post" onSubmit={formSubmit}>
-              <CustomInput type="text" name="title" onChange={inputChange} placeholder="Enter Title" />
-              <CustomInput type="text" name="sub_title" onChange={inputChange} placeholder="Enter Sub Title" />
-              <CustomInput type="text" name="tags" onChange={inputChange} placeholder="Enter Tags" />
-              <CustomTextArea type="text" name="content" onChange={inputChange} placeholder="Enter Content" />
-              <CustomButton color={themes.colors.success}>Submit</CustomButton>
-            </form>
-          </CustomDrawer>
-          <span className="user">Hi, Pankaj</span>
-        </div>
-      </div>
       <div className="body">
         <div className="filter-wrap">
-          <input type="text" className="filter-post" placeholder="Search by tags..." />
+          <input type="text" className="filter-post" onChange={e => setSearch(e.target.value)} value={search} placeholder="Search by tags..." />
         </div>
         <div className="post-container">
-          <SingleItem tags="Hello" title="Main Title Post" sub_title="Sub title post " />
+          {posts.map(item => {
+            return <SingleItem getPost={postsData} key={item._id} id={item._id} tags={item.tags} sub_title={item.sub_title} title={item.title} content={item.content} />;
+          })}
         </div>
       </div>
     </section>

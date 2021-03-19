@@ -33,7 +33,30 @@ h5,
 h6 {
   font-family: $ff-head;
 }
-
+.message {
+  margin-bottom: 1rem;
+  padding: 1.5rem;
+  background: rgba($clr-success, 0.2);
+  border-left: 2px solid;
+  color: $clr-success;
+  animation: fadeIn ease 0.5s;
+}
+.user-form {
+  max-width: 400px;
+  background: #fff;
+  padding: 4rem;
+  margin: 5rem auto;
+  box-shadow: 0 5px 5px -3px $clr-shadow;
+  .form-title {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+  button {
+    justify-content: center !important;
+    width: 100% !important;
+    margin-top: 2rem !important;
+  }
+}
 @media (max-width: 768px) {
   html {
     font-size: 54%;
