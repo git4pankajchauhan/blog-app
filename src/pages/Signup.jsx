@@ -3,6 +3,7 @@ import CustomButton from 'components/Button/CustomButton';
 import { CustomInput } from 'components/Input/CustomInput';
 import React, { useState } from 'react';
 import themes from 'themes/themes';
+import { useHistory } from 'react-router-dom';
 
 const Signup = () => {
   const [message, setMessage] = useState('');
@@ -11,6 +12,7 @@ const Signup = () => {
     email: '',
     password: '',
   });
+  const history = useHistory();
 
   const inputChange = e => {
     const { name, value } = e.target;
@@ -24,12 +26,19 @@ const Signup = () => {
 
   const formSubmit = async e => {
     e.preventDefault();
-    const result = await Axios.post('http://localhost:8000/user/signup', user);
-    if (result.data.status) {
-      setMessage(result.data.message);
-      setTimeout(() => {
-        setMessage(false);
-      }, 3000);
+    try {
+      const result = await Axios.post('http://localhost:8000/user/signup', user);
+      if (result.data.status) {
+        setMessage(result.data.message);
+        setTimeout(() => {
+          setMessage(false);
+          history.push('/login');
+        }, 3000);
+      } else {
+        setMessage('invalid user');
+      }
+    } catch (error) {
+      setMessage('invalid user');
     }
   };
   return (

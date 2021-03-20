@@ -40,6 +40,8 @@ const Posts = () => {
       setTimeout(() => {
         setMessage(false);
       }, 3000);
+    } else {
+      setMessage(result.data.message);
     }
   };
 

@@ -37,6 +37,8 @@ const SingleItem = ({ id, tags, title, sub_title, content, getPost }) => {
       setTimeout(() => {
         setMessage(false);
       }, 3000);
+    } else {
+      setMessage(result.data.message);
     }
   };
   const deletePost = async id => {
